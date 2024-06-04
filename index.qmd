@@ -41,6 +41,14 @@ felidos <-
 ```
 
 ```{r}
+#| label: simplificacion
+
+provincias <-
+  provincias |>
+  st_simplify(dTolerance = 25,preserveTopology = TRUE)
+```
+
+```{r}
 #| label: asignat-crs
 
 provincias <-
