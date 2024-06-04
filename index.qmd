@@ -94,6 +94,7 @@ Cantidad de registros de félidos por mes
 
 ```{r}
 #| label: grafico-registros-x-mes
+#| eval: false
 
 grafico_ggplot2 <-
 felidos |>
@@ -114,28 +115,12 @@ ggplotly(grafico_ggplot2) |> config(locale = "es")
 ```{r}
 #| label: mapa-01
 
-colores_altitud <-
-  colorNumeric(terrain.colors(25), values(altitud), na.color = "transparent")
-
 leaflet() |>
   setView(
     lng = -84.19452,
     lat = 9.572735,
     zoom = 7) |>
   addTiles(group = "Mapa general (OpenStreetMap)") |>
-  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes satelitales (ESRI World Imagery)") |>
-  addRasterImage(altitud,
-                 colors = colores_altitud,
-                 opacity = 0.6,
-                 group = "altitud",
-  ) |>
-   addLegend(
-    title = "Altitud",
-    values = values(altitud),
-    pal = colores_altitud,
-    position = "bottomleft",
-    group = "Altitud"
-  ) |> 
   addPolygons(
     data = provincias,
     color = "black",
@@ -162,10 +147,9 @@ leaflet() |>
   ) |>
   addLayersControl(
     baseGroups = c(
-      "Mapa general (OpenStreetMap)",
-      "Imágenes satelitales (ESRI World Imagery)"
+      "Mapa general (OpenStreetMap)"
     ),
-    overlayGroups = c("Altitud", "Provincias", "Félidos")
+    overlayGroups = c("Provincias", "Félidos")
   ) |> 
   addResetMapButton() |> 
   addSearchOSM() |> 
