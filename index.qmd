@@ -14,9 +14,9 @@ theme: cosmo
 
 library(tidyverse)
 library(plotly)
-library(DT)
+# library(DT)
 library(sf)
-library(terra)
+# library(terra)
 library(leaflet)
 library(leaflet.extras)
 library(leafem)
@@ -65,6 +65,7 @@ provincias <-
 
 ```{r}
 #| label: tabla-felidos
+#| eval: false
 
 felidos |>
   st_drop_geometry() |>
